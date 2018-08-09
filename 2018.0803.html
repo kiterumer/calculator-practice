@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>calculator</title>
+		<style>
+			.calculator{				
+				width:600px;
+				margin:30px auto;
+				background-color: grey;
+				border-radius: 5px;
+				padding: 10px;
+			}
+			.calculator div{
+				margin:20px;
+			}
+			.calculator input{
+				display: inline-block;
+				border-radius: 3px;
+				/*border-color: #000;*/
+				padding: 3px 5px;
+			}
+			.btn{
+				width:25px;
+				height: 25px;
+			}
+			.title{
+				width:300px;
+				margin:20px auto 10px;
+				text-align: center;
+
+			}
+
+		</style>
+	</head>
+	<body>
+		<p class="title">简易计算器</p>
+		<div class="calculator">
+			<div>
+				<input type="text" class="formerInput">
+				<span class="sign">+</span>
+				<input type="text" class="laterInput">
+				<span>=</span>
+				<span class="resultOutput"></span>
+			</div>
+			<div class="button">
+				<input type="button" class="btn" value="+" title="add">
+				<input type="button" class="btn" value="-" title="subtract">
+				<input type="button" class="btn" value="×" title="multiply">
+				<input type="button" class="btn" value="÷" title="divide">
+				<input type="button" class="btn" value="%" title="mod">
+				<input type="button" class="btn" value="^" title="power">
+			</div>
+		</div>
+		<script>
+			// 获取元素
+			// var calculator=document.querySelector('#calculator');
+			// var formerInput=calculator.querySelector('.formerInput');
+			// var laterInput=calculator.querySelector('.laterInput');
+			// var sign=calculator.querySelector('.sign');
+			// var resultOutput=calculator.querySelector('resultOutput');
+			// var btns=calculator.querySelectorAll('.btn');
+			// // 绑定事件
+			// btns[0].onclick=addHandler;
+			// function addHandler(){
+			// 	sign.innerHTML='+';
+			// 	resultOutput.innerHTML= +formerInput.value+ +laterInput.value;
+			// }
+			// var calculator = document.querySelector('.calculator');
+		 //    var formerInput = calculator.querySelector('.formerInput');
+		 //    var laterInput = calculator.querySelector('.laterInput');
+		 //    var sign = calculator.querySelector('.sign');
+		 //    var resultOutput = calculator.querySelector('.resultOutput');
+		 //    var btns = calculator.querySelectorAll('.btn');
+
+	    // 绑定事件    这几个事件的绑定可以用循环来简化
+	    // +
+	    // btns[0].onclick = addHandler;
+	    // // -
+	    // btns[1].onclick = subtractHandler;
+	    // // ×
+	    // btns[2].onclick = multiplyHandler;
+	    // // ÷
+	    // btns[3].onclick = divideHandler;
+	    // // %
+	    // btns[4].onclick = modHandler;
+	    // // ^
+	    // btns[5].onclick = powerHandler;
+
+	    // // 加
+	    // function addHandler() {
+	    // 	// 变换成对应的运算符号
+	    // 	sign.innerHTML = '+';   
+	    // 	// 输入与输出相加得出结果，特别注意做加法的时候要将其转换成数值
+	    // 	resultOutput.innerHTML = +formerInput.value + +laterInput.value;
+	    // }
+	    // // 减
+	    // function subtractHandler() {
+	    // 	sign.innerHTML = '-';
+	    // 	resultOutput.innerHTML = formerInput.value - laterInput.value;
+	    // }
+	    // // 乘
+	    // function multiplyHandler() {
+	    // 	sign.innerHTML = '×';
+	    // 	resultOutput.innerHTML = formerInput.value * laterInput.value;
+	    // }
+	    // // 除
+	    // function divideHandler() {
+	    // 	sign.innerHTML = '÷';
+	    // 	resultOutput.innerHTML = formerInput.value / laterInput.value;
+	    // }
+	    // function modHandler(){
+	    // 	sign.innerHTML='%';
+	    // 	resultOutput.innerHTML = formerInput.value % laterInput.value;
+	    // }
+	    //  function powerHandler(){
+	    // 	sign.innerHTML='^';
+	    // 	resultOutput.innerHTML = Math.pow(formerInput.value,laterInput.value);
+	    // }
+        // each(btns,function(index,elem){
+        // 	elem.onclick=function(){
+        // 		switch(this.title){
+        //            case 'add':
+        //             addHandler();
+        //             break;
+        //             case 'subtract':
+        //             subtractHandler();
+        //             break;
+        //             case 'multiply':
+        //             multiplyHandler();
+        //             break;
+        //             case 'divide':
+        //             divideHandler();
+        //             break;
+        //             case 'mod':
+        //             modHandler();
+        //             break;
+        //             case 'power':
+        //             powerHandler();
+        //             break;
+                    
+        // 		}
+        // 	}
+        // })
+        // function each(array,fn){
+        // 	for(var i=0;i<array.length;i++){
+        // 		fn(i,array[i]);
+        // 	}
+        // }
+        // function updateSign(symbol){
+        // 	sign.innerHTML=symbol;
+        // }
+        // function add(num1,num2){
+        // 	return +num1+ +num2;
+        // }
+        // function subtract(num1,num2){
+        // 	return num1-num2;
+        // }
+        // function multiply(num1,num2){
+        // 	return num1*num2;
+        // }
+        // function divide(num1,num2){
+        // 	return num1/num2;
+        // }
+        // function mod(num1,num2){
+        // 	return num1%num2;
+        // }
+        // function power(num1,num2){
+        // 	return Math.pow(num1,num2);
+        // }
+        // function outputResult(result){
+        // 	resultOutput.innerHTML=result;
+        // }
+        // // 函数里调用函数  注意嵌套关系
+        // function addHandler(){
+        // 	updateSign('+');
+        // 	outputResult(add(formerInput.value,laterInput.value));
+        // }
+        // function subtractHandler(){
+        // 	updateSign('-');
+        // 	outputResult(subtract(formerInput.value,laterInput.value));
+        // }
+        // function multiplyHandler(){
+        // 	updateSign('×');
+        // 	outputResult(multiply(formerInput.value,laterInput.value));
+        // }
+        // function divideHandler(){
+        // 	updateSign('/');
+        // 	outputResult(divide(formerInput.value,laterInput.value));
+        // }
+        // function modHandler(){
+        // 	updateSign('%');
+        // 	outputResult(mod(formerInput.value,laterInput.value));
+        // }
+        // function powerHandler(){
+        // 	updateSign('^');
+        // 	outputResult(Math.pow(formerInput.value,laterInput.value));
+        // }
+        
+            
+        // 管理代码（找到组织）
+        // var wrapElem=document.querySelector('.calculator');
+        // var calculatorElem={
+        //     formerInput:wrapElem.querySelector('.formerInput'),
+        //     laterInput:wrapElem.querySelector('.laterInput'),
+        //     sign:wrapElem.querySelector('.sign'),
+        //     resultOutput:wrapElem.querySelector('.resultOutput'),
+        //     btns: wrapElem.querySelectorALL('.btn')         
+        // };
+             // 获取元素
+		    var wrapElem = document.querySelector('.calculator');
+		    var calculatorElem = {
+		    	formerInput: wrapElem.querySelector('.formerInput'),
+		    	laterInput: wrapElem.querySelector('.laterInput'),
+		    	sign: wrapElem.querySelector('.sign'),
+		    	resultOutput: wrapElem.querySelector('.resultOutput'),
+		    	btns: wrapElem.querySelectorAll('.btn')
+		    };  
+
+        each(calculatorElem.btns , function(index,elem){
+        	elem.onclick=function(){
+        		switch(this.title){
+                   case 'add':
+                    addHandler();
+                    break;
+                    case 'subtract':
+                    subtractHandler();
+                    break;
+                    case 'multiply':
+                    multiplyHandler();
+                    break;
+                    case 'divide':
+                    divideHandler();
+                    break;
+                    case 'mod':
+                    modHandler();
+                    break;
+                    case 'power':
+                    powerHandler();
+                    break;
+                    
+        		}
+        	};
+        });
+        function each(array,fn){
+        	for(var i=0;i<array.length;i++){
+        		fn(i,array[i]);
+        	}
+        }
+        function updateSign(symbol){
+        	calculatorElem.sign.innerHTML=symbol;
+        }
+        // 将几个运算函数作为一个对象的方法来进行调用，封装在一起
+        var operation={
+            add: function(num1,num2){
+            	return +num1+ +num2;
+            },
+            subtract: function(num1,num2){
+            	return num1-num2;
+            },
+            multiply: function(num1,num2){
+            	return num1*num2;
+            },
+            divide: function(num1,num2){
+            	return num1/num2;
+            },
+            mod: function(num1,num2){
+            	return num1%num2;
+            },
+            power: function(num1,num2){
+            	return Math.pow(num1,num2);
+            },
+        }
+        // 输出结果函数  将运算的结果显示在D0M上
+        function outputResult(result){
+        	calculatorElem.resultOutput.innerHTML=result;
+        }
+        // 定义点击按钮时绑定的函数
+        function addHandler(){
+        	updateSign('+');
+        	outputResult(operation.add(calculatorElem.formerInput.value,calculatorElem.laterInput.value));
+        }
+        function subtractHandler() {
+		    	updateSign('-');
+		    	outputResult(operation.subtract(calculatorElem.formerInput.value, calculatorElem.laterInput.value));
+		    }
+		function multiplyHandler() {
+		    	updateSign('×');
+		    	outputResult(operation.multiply(calculatorElem.formerInput.value, calculatorElem.laterInput.value));
+		    }
+		function divideHandler() {
+		    	updateSign('÷');
+		    	outputResult(operation.divide(calculatorElem.formerInput.value, calculatorElem.laterInput.value));
+		    }  
+
+		</script>
+
+		<script>
+			
+		</script>
+	</body>
+	</html>	

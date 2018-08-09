@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title>calculator</title>
+		<style>
+			.calculator{				
+				width:600px;
+				margin:30px auto;
+				background-color: grey;
+				border-radius: 5px;
+				padding: 10px;
+				box-shadow: 0 12px 20px rgba(7,17,27,.2);
+			}
+			.calculator div{
+				margin:20px;
+			}
+			.calculator input{
+				display: inline-block;
+				border-radius: 3px;
+				/*border-color: #000;*/
+				padding: 3px 5px;
+			}
+			.sign{
+				display: inline-block;
+				width:20px;
+				text-align:center;
+			}
+			.btn{
+				width:25px;
+				height: 25px;
+			}
+			.title{
+				width:300px;
+				margin:20px auto;
+				text-align: center;
+
+			}
+
+		</style>
+	</head>
+	<body>
+		<p class="title">简易计算器</p>
+		<div class="calculator">
+			<div>
+				<input type="text" class="formerInput">
+				<span class="sign">+</span>
+				<input type="text" class="laterInput">
+				<span>=</span>
+				<span class="resultOutput"></span>
+			</div>
+			<div class="button">
+				<input type="button" class="btn" value="+" title="add">
+				<input type="button" class="btn" value="-" title="subtract">
+				<input type="button" class="btn" value="×" title="multiply">
+				<input type="button" class="btn" value="÷" title="divide">
+				<input type="button" class="btn" value="%" title="mod">
+				<input type="button" class="btn" value="^" title="power">
+			</div>
+		</div>
+		<script>
+			var wrapElem = document.querySelector('.calculator');
+		    var calculatorElem = {
+		    	formerInput: wrapElem.querySelector('.formerInput'),
+		    	laterInput: wrapElem.querySelector('.laterInput'),
+		    	sign: wrapElem.querySelector('.sign'),
+		    	resultOutput: wrapElem.querySelector('.resultOutput'),
+		    	btns: wrapElem.querySelectorAll('.btn')
+		    };  
+		    // 为每个按钮绑定点击事件，执行相应的操作。运算符号变化，将运算结果显示在页面
+		    each(calculatorElem.btns, function (index, elem	) {
+				    	elem.onclick = function () {
+				    		updateSign(this.value);
+				    		// outputResult(operation[this.value](calculatorElem.formerInput.value, calculatorElem.laterInput.value));
+				    	outputResult(operate(this.title,calculatorElem.formerInput.value, calculatorElem.laterInput.value));
+				    	};
+			    });
+
+
+
+		function each(array,fn){
+        	for(var i=0;i<array.length;i++){
+        		fn(i,array[i]);
+        	}
+        }
+        function updateSign(symbol){
+        	calculatorElem.sign.innerHTML=symbol;
+        }
+        var operation={
+            add: function(num1,num2){
+            	return +num1+ +num2;
+            },
+            subtract: function(num1,num2){
+            	return num1-num2;
+            },
+            multiply: function(num1,num2){
+            	return num1*num2;
+            },
+            divide: function(num1,num2){
+            	return num1/num2;
+            },
+            mod: function(num1,num2){
+            	return num1%num2;
+            },
+            power: function(num1,num2){
+            	return Math.pow(num1,num2);
+            },
+   // 在operation对象中再定义一个添加新运算方法的函数，为未来可能需要添加运算按钮做准备，这个addOperation函数有两个参数，一个是新方法的名字，一个是描述其运算规则的函数
+            addOperation: function(name,fn){
+            	// 判断operation对象中有没有新添加的这个方法，没有才添加，有的话直接返回原对象，于是可以进行链式调用
+            	if(!this[name]){
+            		this[name]=fn;
+            	}
+            	return this;
+            }
+        }
+        // 未来如若需添加新运算，则可以直接调用operation对象的addOperation方法，传递相应额参数，然后可以再其基础上链式调用添加更多的运算方法
+       //  operation.addOperation('mod', function (num1, num2) {
+			    // 	return num1 % num2;
+			    // }).addOperation('power', function (base, power) {
+			    // 	return Math.pow(base, power);
+			    // });  此处便是添加新的运算方法，使用了链式调用
+
+        // operate这个函数是让name与operation对象中的方法相对应，并返回其方法
+        function operate(name,num1,num2){
+        	if(!operation[name]) throw new Error('不存在名为'+name+'的运算方法！');
+        	return operation[name](num1,num2);
+        }
+
+
+        // 输出结果函数  将运算的结果显示在D0M上
+        function outputResult(result){
+        	calculatorElem.resultOutput.innerHTML=result;
+        }
+		</script>
+    </body>
+	</html>	
